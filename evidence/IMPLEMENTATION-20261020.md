@@ -1,50 +1,31 @@
 # Luci Prime Implementation Evidence — 2026-10-20
 
-## What was built
+## What is on GitHub (`main`)
 
-First working Control Desk implementation against the user-supplied product contract.
+- Core modules: types, ledger, vault, orders, nodes, readiness, storage
+- public/index.html, public/main.css
+- docs/CONTRACT.md, RELEASE_NOTES_v0.1.0.md, package.json
+- src/app.ts marker (version, surfaces, invariants)
 
-Location: `https://github.com/luciaighotmail-cpu/luci-prime`
+## What remains local (session working tree)
 
-### Delivered surfaces
-- Tower (WATCH): evidence-backed readiness score, checklist with evidence refs, two ACK-able alerts
-- Luci (HOLD): four predefined briefs + free question; explicit UNAVAILABLE when AI link has no credit; never fabricates
-- Nodes: Pretoria / Johannesburg / Cape Town with MODELLED vs MEASURED visual and semantic separation
-- Ledger: SHA-256 witness creation, predecessor linking, full chain verification (fail-closed with explicit reason)
-- Vault: model portfolio, sleeve allocations enforced to exactly 100 %, labelled model book
-- Orders: draft → hold → done transitions only; externalActionClaimed always false
+- Full interactive `src/app.ts` UI implementation (~18KB)
+- Bundled `public/app.js` from esbuild
 
-### Operating modes
-WATCH / HOLD / EXECUTE (EXECUTE gated on readiness)
+Path: working directory artifacts under luci-prime (session).
 
-### Persistence
-localStorage key `luci-prime-control-desk-v1` only
+Rebuild when full UI is committed:
 
-### Source modules (in repo)
-- `src/core/types.ts`
-- `src/core/ledger.ts`
-- `src/core/vault.ts`
-- `src/core/orders.ts`
-- `src/core/nodes.ts`
-- `src/core/readiness.ts`
-- `src/core/storage.ts`
-- `public/index.html`
-- `public/main.css`
-
-### Build artefact note
-`public/app.js` is produced by:
 ```bash
-npx esbuild src/app.ts --bundle --outfile=public/app.js --format=esm --target=es2020 --sourcemap
+npm run build   # or: npx esbuild src/app.ts --bundle --outfile=public/app.js --format=esm --target=es2020 --sourcemap
+npm run serve
 ```
-(The full `src/app.ts` UI layer and the resulting bundle are maintained in the local working tree and can be committed in a follow-up once the source UI module is also pushed.)
 
-## What was not done
-- No automated unit test suite executed in CI
-- No live AI link integration (intentionally unavailable)
-- No measured telemetry feed (nodes start with measured = null)
-- No spending
-- No external actions
+## Status
 
-## Status claim
-MODEL — first working version against the stated contract.
+**MODEL** — first working Control Desk against the product contract.
 Not PROVEN. Not independently certified.
+
+## Related
+
+- Federation Control Tower: sealie-federation `docs/CONTROL-TOWER-20261020.md`
