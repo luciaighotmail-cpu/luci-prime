@@ -1,0 +1,13 @@
+{
+  "name": "luci-prime",
+  "version": "0.1.0",
+  "description": "Sealie Federation Control Desk — proof-first operating interface",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/app.ts --bundle --outfile=public/app.js --format=esm --target=es2020 --sourcemap && cp src/styles/main.css public/main.css",
+    "serve": "npx --yes serve public -p 4173"
+  },
+  "keywords": ["sealie", "federation", "control-desk", "luci"],
+  "license": "UNLICENSED"
+}
